@@ -18,29 +18,28 @@ function edgeDetector(filename,edge_thresh)
   %Calculate gradient magnitude and direction matrices
   [G_mag, G_dir] = gradientCalc(row_diffs, col_diffs);
 
-  inverseG_mag = (255-G_mag);
-  imshow(uint8(inverseG_mag));
-  title('Gradient Magnitude');
+  edge = (G_mag);
+  for i = 1:size(edge,1)
+    for j = 1:size(edge,2)
+        
+        if edge(i,j) < 15
+            edge(i,j) = 0;
+        else
+            edge(i,j) = 255;
+        end
+    end
+  end  
   
-  %Add colors to the original black & white image
-  edges = addColors(G_mag, G_dir, edge_thresh);
+  
+  imshow(uint8(edge));
+  title('Binarized Gradient Magnitude');
+  
+  corners = corner(bw_im);
+  hold on
+  plot(corners(:,1),corners(:,2),'r*');
+  
 
-  %Subplot display
-  figure
-  subplot(3,2,1),imshow(uint8(color_im));
-  title(strcat(['Input Image: ' filename]),'Interpreter','none');
-  subplot(3,2,2),imshow(uint8(bw_im));
-  title('B&W Image');
-  subplot(3,2,3),imshow(uint8(bw_smooth));
-  title('Gaussian Smoothing');
-  subplot(3,2,4),imshow(uint8(255*abs(bw_smooth-bw_im)));
-  title('Normalized Noise Reduction');
-  subplot(3,2,5),imshow(uint8(G_mag));
-  title('Gradient Magnitude');
-  subplot(3,2,6),imshow(uint8(edges));
-  title(strcat(['Edge Directions: Thresh = ' num2str(edge_thresh)]));
-
-  %Write to G_mag and Edges JPG files because they look cool!
-  imwrite(uint8(inverseG_mag),'inverseG_mag.jpg','jpg');
-
+  
+  
+  
 end
