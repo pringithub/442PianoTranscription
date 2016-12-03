@@ -40,16 +40,14 @@ theKeysAre = getPressedKeysFromImage(img_rot, keyMap)
 
 % wrtie note to file
 for i = 1:size(theKeysAre)
-    key = strcat( theKeysAre(i), num2str(2));    
-    fprintf(fileID, ' ');
+    key = strcat( theKeysAre(i), num2str(2));
+    
     fprintf(fileID, key);    
     
 end
 fprintf(fileID, '\n}');
 fclose(fileID);
 
-%FIGURE OUT HOW TO RUN THE BATCH SCRIPT FROM MATLAB 
-%THE FOLLOWING HAS SOME TYPE OF FILE LOCKING ASSOCIATED WITH IDK
-%!runPad;
+
 
 

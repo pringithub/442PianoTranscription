@@ -3,7 +3,7 @@ import math
 #import sys
 
 
-file = "C:\Users\Phillip\College\EECS442\Project\\" + "music.ly"
+file = "C:\Users\Phillip\College\EECS442\Project\442PianoTransctiption\\" + "music.ly"
 fptr = open(file, "w")
 
 fptr.write(ur'\version "2.16.0"' + "\n")

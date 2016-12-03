@@ -12,13 +12,3 @@ fprintf(fileID, '  subtitle = balls \n}\n');% can't be more than two words?
 fprintf(fileID, '\n\n\\relative c'' {\n');
 
 end
-
-key = 'c'
-duration = 2;
-key = key + duration;
-fprintf(fileID, '  c2 e2 f2');
-fprintf(fileID, '\n}');
-
-fclose(fileID);
-
-!runPad
