@@ -1,6 +1,6 @@
 function fileID = writeHeaderToLilyPadFile
 
-file = 'C:\Users\Phillip\College\EECS442\Project\442PianoTranscription\RealProject\music.ly'
+file = '../bin/music.ly';
 fileID = fopen(file, 'w');
 
 fprintf(fileID, '\\version "2.16.0"\n');
