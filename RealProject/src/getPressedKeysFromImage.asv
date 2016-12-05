@@ -1,6 +1,9 @@
-function theKeysAre = getPressedKeysFromImage(img, keyMap, criticalCorners)
+function theKeysAre = getPressedKeysFromImage(img, keyMap, initialCorners)
 
   theKeysAre = [];
+  
+  
+  criti
   
   for i = 1:size(criticalCorners)
     point = [criticalCorners(i,1) criticalCorners(i,2)];

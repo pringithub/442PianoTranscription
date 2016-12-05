@@ -35,7 +35,7 @@ plot(centroids(:,1), centroids(:,2), 'm*');
 keyMap = ['a' 'b' 'c' 'd' 'e' 'f' 'g' 'a' 'b' 'c' 'd'];
 
 initial_corners = getCriticalCorners(src_img);
-theKeysAre = getPressedKeysFromImage(img_rot, keyMap, initial_corners);
+theKeysAre = getPressedKeysFromImage(img_rot, keyMap, initial_co)
 
 % wrtie note to file
 %     for i = 1:size(theKeysAre)
