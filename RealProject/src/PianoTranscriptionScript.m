@@ -5,46 +5,44 @@
 % clc; clear all; 
 close all;
 
-src_img = imread('../img/IMG_0460.jpg');
+src_img = imread('../img/IMG_0467.jpg');
 
 % Open music.ly, write header
-% fileID = writeHeaderToLilyPadFile;
+fileID = writeHeaderToLilyPadFile;
 
 % Run kmeans, get labeled image
 separated = kmeans_clustering(src_img, 5);
+figure; imshow(label2rgb(separated, @jet, [.5 .5 .5])); title('K-means clustering of keys');
 separated = bwlabel(uint8(separated));
 
 img = separated;%imread('lol1.png');
-figure, imshow(img), title('Select the 2 corners to perform a rotation on'), hold on;
 
 % Get two refrence points in image, parallel to piano bottom
-% Note - not necessary
-img_rot = rotateImage(img);
-close all;
-figure, imshow( img_rot ), title('Select the bounding box for corner detections'), hold on;
+[initial_corners rotational_corners] = getCriticalCorners(src_img);
+img_rot = rotateImage(img, rotational_corners);
 
 % Get the centroids of the image
 % Note - may be useful later
 measurements = regionprops(img_rot, 'Centroid');
 centroids = cat(1,measurements.Centroid);
 centroids = centroids(find(sum(isnan(centroids),2)==0),:);
-plot(centroids(:,1), centroids(:,2), 'm*');
+figure; imshow(img); title('Cluster selected by Kmeans algorithm with centroids'); hold on;
+plot(centroids(:,1), centroids(:,2), 'm*'); hold off;
 
 % Key map should be over the range of keys in the image
 % Should be fixed per image set
 keyMap = ['a' 'b' 'c' 'd' 'e' 'f' 'g' 'a' 'b' 'c' 'd'];
 
-initial_corners = getCriticalCorners(src_img);
 theKeysAre = getPressedKeysFromImage(img_rot, keyMap, initial_corners);
 
 % wrtie note to file
-%     for i = 1:size(theKeysAre)
-%         key = strcat( theKeysAre(i), num2str(2));    
-%         fprintf(fileID, ' ');
-%         fprintf(fileID, key);    
-% 
-%     end
-%     fprintf(fileID, '\n}');
-%     fclose(fileID);
+for i = 1:size(theKeysAre)
+    key = strcat( theKeysAre(i), num2str(2));    
+    fprintf(fileID, ' ');
+    fprintf(fileID, key);    
 
-%     dos('runPad.bat');
+end
+fprintf(fileID, '\n}');
+fclose(fileID);
+
+dos('runPad.bat');
