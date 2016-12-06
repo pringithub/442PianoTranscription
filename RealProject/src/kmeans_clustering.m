@@ -39,7 +39,7 @@ function separated = kmeans_clustering(rgb_img, k)
         % Fill any holes inside each blob
         bw = imfill(bw,'holes');
         [B,L] = bwboundaries(bw,'noholes');
-        
+figure, imshow(L);        
         % Find the image with the white keys
         % We assume that that image has the most nonzero pixels
         n = nnz(L);

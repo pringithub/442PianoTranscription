@@ -1,8 +1,8 @@
 function img_rot = rotateImage(img)
 
-  [x,y] = ginput(2);
-  %x = [147;774];
-  %y = [413;400];
+  %[x,y] = ginput(2);
+  x = [147;774];
+  y = [413;400];
   point1 = [x(1) y(1) 1];
   point2 = [x(2) y(2) 1];
   l = cross(point1,point2);

@@ -1,0 +1,38 @@
+function writeImageNotesToFile(fileID, theKeysAre)
+
+    % If keys are same accross 2+ images, make the note 
+    %   longer in the sheet music
+    %   - Resolution will be eigth note
+    if i > 3 && theKeysAre(i) == theKeysAre(i-1)
+        pressedLength = pressedLength/2;
+    else
+        pressedLength = 8;
+    end
+    
+    
+    if size(theKeysAre) > 1
+        fprintf(fileID, ' <');
+        for j = 1:size(theKeysAre)
+            
+        
+    end
+                                          
+                                
+        % Keys detected as pressed - write note
+        if ( theKeysAre(j) > 1)
+            
+            
+        else if ( theKeysAre
+            key = strcat( theKeysAre(j), num2str(pressedLength));    
+            fprintf(fileID, ' ');
+            fprintf(fileID, key);                
+        % No keys detected as pressed - write rest
+        else
+            rest = strcat('r', num2str(pressedLength));
+            fprintf(fileID, ' ');
+            fprintf(fileID, rest);
+        end
+        
+    end
+
+end
