@@ -5,16 +5,16 @@ function [final_corners rotational_indexes] = getCriticalCorners(img)
 
     % Retreive the corners and edges
     [edges corners] = corner_detector(img);
-    
+    plot(corners(:,1), corners(:,2), 'r*');
+        
     % Use kmeans to identify the corners correlating to the edges of the
     % keys
-    [cluster_idxs,cluster_centers] = kmeans(corners(:,2),4,'distance','sqEuclidean', 'Replicates',3);
+    [cluster_idxs,cluster_centers] = kmeans(corners(:,2),3,'distance','sqEuclidean', 'Replicates',3);
     bot_cluster = find(cluster_centers == max(cluster_centers));
     cluster_centers(bot_cluster) = 1;
     mid_cluster = find(cluster_centers == max(cluster_centers));
     x_coords = corners(cluster_idxs==mid_cluster,1);
     y_coords = corners(cluster_idxs==mid_cluster,2);
-    plot(x_coords, y_coords, 'r*');
     
     % Average the y coordinates of the corners, and identify which corners
     % are not on the average line

@@ -6,3 +6,4 @@
 
 
 \relative c' {
+ r8 c8 d8

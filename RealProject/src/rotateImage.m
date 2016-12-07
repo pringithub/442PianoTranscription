@@ -11,7 +11,7 @@ function img_rot = rotateImage(img, rotational_corners)
   img_rot = imrotate(img, angle_deg);
   
     % Dedicated figure for image rotation
-    figure; imshow(img_rot); title('Image rotation'); hold on;
-    hold off;
+    % figure; imshow(img_rot); title('Image rotation'); hold on;
+    % hold off;
   
 end

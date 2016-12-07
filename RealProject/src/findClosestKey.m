@@ -1,4 +1,4 @@
-function keyValue = findClosestKey(separatedImg, point)
+function keyValue = findClosestKey(separatedImg, point, radiusOfReach)
 
   % check if the corner point is part of the key
   point = floor(point);
@@ -9,10 +9,8 @@ function keyValue = findClosestKey(separatedImg, point)
   end
 
 
-  % find the key closest to the point by expanding a rectangle - NOT DONE
-  rectPx = [];
-  radius = 1;
-  
+  % find the key closest to the point by expanding a rectangle 
+  radius = radiusOfReach;
   rectPx = [point(1)-radius point(2)-radius;
             point(1)-radius point(2);
             point(1)-radius point(2)+radius;
@@ -20,8 +18,19 @@ function keyValue = findClosestKey(separatedImg, point)
             point(1) point(2)+radius;
             point(1)+radius point(2)-radius;
             point(1)+radius point(2);
-            point(1)+radius point(2)+radius;
+            point(1)+radius point(2)+radius
             ];
-
+        
+  for i = 1:size(rectPx)
+      
+      pinpoint = separatedImg( rectPx(i, 2), rectPx(i, 1) );
+      if pinpoint > 0
+          keyValue = pinpoint;
+          return;
+      end
+      
+  end
+  
+  keyValue = 0;
+  
 end
-
